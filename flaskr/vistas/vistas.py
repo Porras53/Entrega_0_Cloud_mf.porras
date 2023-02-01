@@ -2,6 +2,7 @@ from sqlite3 import IntegrityError
 from flask import request
 from flask_restful import Resource
 from ..modelos import *
+from flask_jwt_extended import jwt_required, create_access_token
 
 evento_schema = EventoSchema()
 usuario_schema = UsuarioSchema()
@@ -63,9 +64,10 @@ class VistaSignIn(Resource):
     
     def post(self):
         nuevo_usuario = Usuario(nombre=request.json["nombre"], contrasena=request.json["contrasena"])
+        token_de_acceso= create_access_token(identity=request.json['nombre'])
         db.session.add(nuevo_usuario)
         db.session.commit()
-        return 'Usuario creado exitosamente', 201
+        return {'mensaje':'usuario creado exitosamente','token de acceso':token_de_acceso}
 
     def put(self, id_usuario):
         usuario = Usuario.query.get_or_404(id_usuario)
@@ -80,7 +82,7 @@ class VistaSignIn(Resource):
         return '',204
 
 class VistaEventosUsuario(Resource):
-
+    @jwt_required()
     def post(self, id_usuario):
         nuevo_evento = Evento(nombre=request.json["nombre"], \
             categoria=request.json["categoria"], \
@@ -100,7 +102,8 @@ class VistaEventosUsuario(Resource):
             return 'El usuario ya tiene un album con dicho nombre',409
 
         return evento_schema.dump(nuevo_evento)
-
+    
+    @jwt_required()
     def get(self, id_usuario):
         usuario = Usuario.query.get_or_404(id_usuario)
         return [evento_schema.dump(al) for al in usuario.albumes]
