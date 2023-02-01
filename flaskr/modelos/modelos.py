@@ -31,7 +31,7 @@ class Evento(db.Model):
 class Usuario(db.Model):
     id= db.Column(db.Integer, primary_key=True)
     nombre=db.Column(db.String(50))
-    contrasenia=db.Column(db.String(50))
+    contrasena=db.Column(db.String(50))
     eventos = db.relationship('Evento', cascade='all, delete, delete-orphan')
 
 class EnumADiccionario(fields.Field):
