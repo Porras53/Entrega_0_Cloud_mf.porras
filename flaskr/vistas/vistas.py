@@ -14,10 +14,9 @@ class VistaEventos(Resource):
             categoria=request.json["categoria"], \
             lugar=request.json["lugar"], \
             direccion=request.json["direccion"], \
-            fechaInic=request.json["fechaInic"], \
-            fechaFina=request.json["fechaFina"], \
-            modalidad=request.json["modalidad"], \
-            usuario=request.json["usuario"])
+            fechaInic=datetime.strptime(request.json['fechaInic'], '%m-%d-%Y'), \
+            fechaFina=datetime.strptime(request.json['fechaFina'], '%m-%d-%Y'), \
+            modalidad=request.json["modalidad"])
         db.session.add(nuevo_evento)
         db.session.commit()
         return evento_schema.dump(nuevo_evento)
@@ -36,8 +35,8 @@ class VistaEvento(Resource):
         evento.categoria = request.json.get("categoria",evento.categoria)
         evento.lugar = request.json.get("lugar",evento.lugar)
         evento.direccion = request.json.get("direccion",evento.direccion)
-        evento.fechaInic = request.json.get("fechaInic",evento.fechaInic)
-        evento.fechaFina = request.json.get("fechaFina",evento.fechaFina)
+        evento.fechaInic = datetime.strptime( request.json.get("fechaInic", evento.fechaInic) , '%m-%d-%Y')
+        evento.fechaFina = datetime.strptime( request.json.get("fechaFina", evento.fechaFina) , '%m-%d-%Y')
         evento.modalidad = request.json.get("modalidad",evento.modalidad)
         evento.direccion = request.json.get("direccion",evento.usuario)
         db.session.commit()
@@ -88,12 +87,11 @@ class VistaEventosUsuario(Resource):
             categoria=request.json["categoria"], \
             lugar=request.json["lugar"], \
             direccion=request.json["direccion"], \
-            fechaInic=request.json["fechaInic"], \
-            fechaFina=request.json["fechaFina"], \
-            modalidad=request.json["modalidad"], \
-            usuario=request.json["usuario"])
+            fechaInic=datetime.strptime(request.json['fechaInic'], '%m-%d-%Y'), \
+            fechaFina=datetime.strptime(request.json['fechaFina'], '%m-%d-%Y'), \
+            modalidad=request.json["modalidad"])
         usuario = Usuario.query.get_or_404(id_usuario)
-        usuario.albumes.append(nuevo_evento)
+        usuario.eventos.append(nuevo_evento)
 
         try:
             db.session.commit()

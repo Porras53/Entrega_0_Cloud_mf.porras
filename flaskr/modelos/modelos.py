@@ -1,3 +1,4 @@
+from datetime import datetime
 import enum
 from flask_sqlalchemy import SQLAlchemy
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
@@ -22,8 +23,8 @@ class Evento(db.Model):
     categoria= db.Column(db.Enum(Categoria))
     lugar=db.Column(db.String(50))
     direccion=db.Column(db.String(50))
-    fechaInic=db.Column(db.Date)
-    fechaFina=db.Column(db.Date)
+    fechaInic=db.Column(db.DateTime, default=datetime.utcnow)
+    fechaFina=db.Column(db.DateTime, default=datetime.utcnow)
     modalidad= db.Column(db.Enum(Modalidad))
     usuario = db.Column(db.Integer, db.ForeignKey("usuario.id"))
     
