@@ -1,0 +1,196 @@
+<!-- <app-header></app-header> -->
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-10">
+      <div class="card mx-3 my-5">
+        <div class="row">
+          <div class="col-12 text-center">
+            <p class="mt-5 mb-2 fs-3 fw-bold">Crear evento</p>
+          </div>
+        </div>
+        <form class="mx-5 my-3" [formGroup]="eventoForm" (ngSubmit)="crearEvento(eventoForm.value)">
+
+          <div class="form-group my-2">
+            <div class="row">
+              <div class="col-2 text-start">
+                <label>Nombre</label>
+              </div>
+              <div class="col-10">
+                <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre del evento">
+              </div>
+            </div>
+
+            <div class="row justify-content-center">
+              <div class="col-8">
+                <div class="alert alert-danger my-3" *ngIf="eventoForm.get('nombre')?.hasError('required') && eventoForm.get('nombre')?.touched">
+                  Debe ingresar un nombre para el evento
+                </div>
+                <div class="alert alert-danger my-3" *ngIf="eventoForm.get('nombre')?.hasError('minlength')">
+                  El nombre debe tener por lo menos un carácter
+                </div>
+                <div class="alert alert-danger my-3" *ngIf="eventoForm.get('nombre')?.hasError('maxlength')">
+                  El nombre no debe exceder los 50 carácteres
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group my-2">
+            <div class="row">
+              <div class="col-2 text-start">
+                <label for="lugar">Lugar </label>
+              </div>
+              <div class="col-10">
+                <input type="text" class="form-control" formControlName="lugar" placeholder="Lugar del evento">
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-8">
+                <div class="alert alert-danger my-3" *ngIf="eventoForm.get('lugar')?.hasError('required') && eventoForm.get('lugar')?.touched">
+                  Debe ingresar un lugar para el evento
+                </div>
+                <div class="alert alert-danger my-3" *ngIf="eventoForm.get('lugar')?.hasError('minlength')">
+                  El lugar debe tener por lo menos un carácter
+                </div>
+                <div class="alert alert-danger my-3" *ngIf="eventoForm.get('lugar')?.hasError('maxlength')">
+                  El lugar no debe exceder los 50 carácteres
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group my-2">
+            <div class="row">
+              <div class="col-2 text-start">
+                <label for="fechaInic">Fecha Inicio </label>
+              </div>
+              <div class="col-10">
+                <input type="text" class="form-control" formControlName="fechaInic" placeholder="Fecha Inicial">
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-8">
+                <div class="alert alert-danger my-3" *ngIf="eventoForm.get('fechaInic')?.hasError('required') && eventoForm.get('fechaInic')?.touched">
+                  Debe ingresar una FECHA INICIAL para el evento
+                </div>
+                <div class="alert alert-danger my-3" *ngIf="eventoForm.get('fechaInic')?.hasError('minlength')">
+                  LA FECHA INICIAL debe tener por lo menos un carácter
+                </div>
+                <div class="alert alert-danger my-3" *ngIf="eventoForm.get('fechaInic')?.hasError('maxlength')">
+                  LA FECHA INICIAL no debe exceder los 50 carácteres
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group my-2">
+            <div class="row">
+              <div class="col-2 text-start">
+                <label for="fechaFina">Fecha Final </label>
+              </div>
+              <div class="col-10">
+                <input type="text" class="form-control" formControlName="fechaFina" placeholder="Fecha Final">
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-8">
+                <div class="alert alert-danger my-3" *ngIf="eventoForm.get('fechaFina')?.hasError('required') && eventoForm.get('fechaFina')?.touched">
+                  Debe ingresar una FECHA Final para el evento
+                </div>
+                <div class="alert alert-danger my-3" *ngIf="eventoForm.get('fechaFina')?.hasError('minlength')">
+                  LA FECHA Final debe tener por lo menos un carácter
+                </div>
+                <div class="alert alert-danger my-3" *ngIf="eventoForm.get('fechaFina')?.hasError('maxlength')">
+                  LA FECHA Final no debe exceder los 50 carácteres
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group my-2">
+            <div class=" row">
+              <div class="col-2 text-start">
+                <label for="categoria"> Categoria </label>
+              </div>
+              <div class="col-10">
+                <select class="form-select" formControlName="categoria">
+                  <option value="" disabled>Selecciona la cateogria del evento</option>
+                  <option *ngFor="let categoria of categorias" value={{categoria.llave}}>{{categoria.llave}}</option>
+                  <!-- <option value="CONFERENCIA"> CONFERENCIA</option>
+                  <option value="SEMINARIO"> SEMINARIO</option>
+                  <option value="CONGRESO"> CONGRESO</option>
+                  <option value="CURSO"> CURSO</option> -->
+                </select>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-8">
+                <div class="alert alert-danger my-3" *ngIf="eventoForm.get('categoria')?.hasError('required') && eventoForm.get('categoria')?.touched">
+                  Debe seleccionar la categoria del evento
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group my-2">
+            <div class="row">
+              <div class="col-2 text-start">
+                <label for="direccion">Direccion </label>
+              </div>
+              <div class="col-10">
+                <textarea class=" form-control" formControlName="direccion" placeholder="Direccion del evento"></textarea>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-8">
+                <div class="alert alert-danger my-3" *ngIf="eventoForm.get('direccion')?.hasError('required') && eventoForm.get('direccion')?.touched">
+                  Debe ingresar una direccion para el evento
+                </div>
+                <div class="alert alert-danger my-3" *ngIf="eventoForm.get('direccion')?.hasError('minlength')">
+                  La direccion del evento debe tener por lo menos un carácter
+                </div>
+                <div class="alert alert-danger my-3" *ngIf="eventoForm.get('direccion')?.hasError('maxlength')">
+                  La direccion del evento no debe superar los 50 carácteres
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group my-2">
+            <div class=" row">
+              <div class="col-2 text-start">
+                <label for="modalidad"> Modalidad </label>
+              </div>
+              <div class="col-10">
+                <select class="form-select" formControlName="modalidad">
+                  <option value="" disabled>Selecciona la modalidad del evento</option>
+                  <option *ngFor="let modalidad of modalidades" value={{modalidad.llave}}>{{modalidad.llave}}</option>
+                  <!-- <option value="PRESENCIAL"> PRESENCIAL</option>
+                  <option value="VIRTUAL"> VIRTUAL</option> -->
+                </select>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-8">
+                <div class="alert alert-danger my-3" *ngIf="eventoForm.get('modalidad')?.hasError('required') && eventoForm.get('modalidad')?.touched">
+                  Debe seleccionar el modalidad del evento
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-4">
+            <div class="col-6 text-end">
+              <button class="btn btn-danger" (click)="cancelCreate()">Cancelar</button>
+            </div>
+            <div class="col-6 text-start">
+              <button type="submit" class="btn btn-primary" [disabled]="!eventoForm.valid">Guardar cambios</button>
+            </div>
+          </div>
+
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

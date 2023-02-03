@@ -1,0 +1,29 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-12 text-center mb-2" >
+      <label class="fs-4 fw-bold">Evento: {{evento.nombre}} ({{evento.lugar}}) ({{evento.fechaInic}}) ({{evento.fechaFina}})</label>
+      <button *ngIf="evento" type="button" class="btn btn-outline-success ms-3 me-2" (click)="goToEdit()" title="Editar evento"><i class="bi bi-pencil-square"></i></button>
+      <button *ngIf="evento" type="button" class="btn btn-outline-danger me-1" (click)="eliminarEvento()" title="Eliminar evento"><i class="bi bi-trash-fill"></i></button>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col-6">
+      <div class="card">
+        <div class="card-body">
+          <p><span class="fw-bold">Categoria: </span> <span class="text-capitalize">{{evento.categoria.llave}}</span></p>
+          <p>{{evento.direccion}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="card">
+        <div class="card-body">
+          <p><span class="fw-bold">Modalidad: </span> <span class="text-capitalize">{{evento.modalidad.llave}}</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

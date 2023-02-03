@@ -1,0 +1,69 @@
+<div class="container my-4">
+  <div class="row">
+    <div class="col-4">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col-10 text-center">
+              <label class="fs-4">Eventos</label>
+            </div>
+            <div class="col-2 text-center">
+              <button type="button" class="my-1 btn btn-outline-primary btn-circle" (click)="irCrearEvento()"><i class="bi bi-plus-lg"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+
+          <div class="input-group my-2">
+            <input #busqueda type="search" class="form-control" placeholder="Buscar eventos" aria-label="Search" (keyup)="buscarEvento(busqueda.value)">
+          </div>
+
+          <table class="table table-hover mb-0" aria-describedby="colecName">
+            <thead>
+              <tr>
+                <th class="h4">Nombre</th>
+                <th class="h4">Categoría</th>
+                <th class="h4">Lugar</th>
+                <th class="h4">Direccion</th>
+                <th class="h4">Fecha Inicio</th>
+                <th class="h4">Fecha Final</th>
+                <th class="h4">Modalidad</th>
+              </tr>
+
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let evento of mostrarEventos; index as i" (click)="onSelect(evento, i)" [ngClass]="{'selected': i === indiceSeleccionado}">
+                  <td>
+                    <dd>{{evento.nombre}}</dd>
+                  </td>
+                  <td>
+                    <dd>{{evento.categoria.llave}}</dd>
+                  </td>
+                  <td>
+                    <dd>{{evento.lugar}}</dd>
+                  </td>
+                  <td>
+                    <dd>{{evento.direccion}}</dd>
+                  </td>
+                  <td>
+                    <dd>{{evento.fechaInic}}</dd>
+                  </td>
+                  <td>
+                    <dd>{{evento.fechaFina}}</dd>
+                  </td>
+                  <td>
+                    <dd>{{evento.modalidad.llave}}</dd>
+                  </td>
+                </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-8">
+      <app-evento-detail (deleteEvento)="eliminarEvento()" [evento]="eventoSeleccionado"></app-evento-detail>
+    </div>
+  </div>
+</div>
