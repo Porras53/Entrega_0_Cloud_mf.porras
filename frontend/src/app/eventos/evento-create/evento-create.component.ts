@@ -37,11 +37,11 @@ export class EventoCreateComponent implements OnInit {
 
   modalidades:Array<Modalidad> = [
     {
-      llave: "CONFERENCIA",
+      llave: "PRESENCIAL",
       valor: 1
     },
     {
-      llave: "SEMINARIO",
+      llave: "VIRTUAL",
       valor: 2
     }
   ];
@@ -79,7 +79,6 @@ export class EventoCreateComponent implements OnInit {
     }
 
     crearEvento(newevento: Evento){
-      this.eventoForm.get('anio')?.setValue(parseInt(this.eventoForm.get('anio')?.value))
       this.eventosService.crearEvento(this.userId, this.token, newevento)
       .subscribe(evento => {
         this.showSuccess(evento)

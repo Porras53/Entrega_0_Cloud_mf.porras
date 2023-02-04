@@ -35,12 +35,14 @@ export class UsuarioSignupComponent implements OnInit {
   registrarUsuario(){
     this.usuarioService.userSignUp(this.usuarioForm.get('nombre')?.value, this.usuarioForm.get('password')?.value)
     .subscribe(res => {
+      console.log(res)
       const decodedToken = this.helper.decodeToken(res.token);
+      console.log(decodedToken)
       this.router.navigate([`/evento/${decodedToken.sub}/${res.token}`])
       this.showSuccess()
-    },
-    error => {
-      this.showError(`Ha ocurrido un error: ${error.message}`)
+    // },
+    // error => {
+    //   this.showError(`Ha ocurrido un error: ${error.message}`)
     })
   }
 

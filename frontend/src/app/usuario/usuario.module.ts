@@ -12,4 +12,5 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   exports: [UsuarioLoginComponent, UsuarioSignupComponent]
 })
+
 export class UsuarioModule { }

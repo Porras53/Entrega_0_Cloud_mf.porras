@@ -27,11 +27,16 @@ export class EventoListComponent implements OnInit {
   indiceSeleccionado: number
 
    async ngOnInit() {
-    if(!parseInt(this.router.snapshot.params['userId']) || this.router.snapshot.params['userToken'] === " "){
+    console.log("ACAAAA");
+    console.log(this.router.snapshot.params);
+
+    if(!this.router.snapshot.params['userId'] || this.router.snapshot.params['userToken'] === " "){
       this.showError("No hemos podido identificarlo, por favor vuelva a iniciar sesión.")
+      console.log("XD");
     }
     else{
-      this.userId = parseInt(this.router.snapshot.params['userId'])
+      console.log("ASDASDASDASD");
+      this.userId = this.router.snapshot.params['userId']
       this.token = this.router.snapshot.params['userToken']
       await this.getEventos();
     }

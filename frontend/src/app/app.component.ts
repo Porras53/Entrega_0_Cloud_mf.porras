@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
-import { enviroment } from '@angular/core';
+import { enviroment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -14,5 +14,4 @@ export class AppComponent {
   {
     this.http.get(enviroment.SERVER_URL)
   }
-
 }

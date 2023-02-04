@@ -37,11 +37,11 @@ export class eventoEditComponent implements OnInit {
 
   modalidades:Array<Modalidad> = [
     {
-      llave: "CONFERENCIA",
+      llave: "PRESENCIAL",
       valor: 1
     },
     {
-      llave: "SEMINARIO",
+      llave: "VIRTUAL",
       valor: 2
     }
   ];
